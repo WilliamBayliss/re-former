@@ -28,6 +28,9 @@
 =end%>
 
 <%= form_with model: @user, method: :post do |form| %>
+    <% @user.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+    <% end %>
     <%= form.text_field :username, placeholder: "Username" %><br><br>
     <%= form.email_field :email, placeholder: "example@example.com" %><br><br>
     <%= form.password_field :password, minlength: 8, placeholder: "Password" %><br><br>
