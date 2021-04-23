@@ -1,4 +1,12 @@
 class UsersController < ApplicationController
+  def index
+    @user = User.all
+  end
+
+  def show
+    @user = User.find(params[:format])
+  end
+  
   def new
     @user = User.new
   end
@@ -7,14 +15,26 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     # @user = User.new(username: params[:username], email: params[:email], password: params[:password])
     if @user.save
-        redirect_to new_users_path
+        redirect_to root_path
     else
         render :new
     end
   end
 
-  def show
+  def edit
+    @user = User.find(params[:format])
   end
+
+  def update
+    @user = User.find(params[:format])
+
+    if @user.update(user_params)
+        redirect_to root_path
+    else
+        render :edit
+    end
+  end
+
 
   private
     def user_params
